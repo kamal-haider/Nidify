@@ -1,0 +1,6 @@
+{
+    "${feature}_sub_directory": [
+        "file_name.dart",
+        "${feature}_feature_name.dart"
+    ]
+}
