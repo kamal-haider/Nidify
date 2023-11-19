@@ -18,7 +18,7 @@ dart run nidify.dart test template.json
 
 ## Configure the template
 
-The JSON template should be structured as a nested object where each key represents a directory and each value can either be an array of filenames or another nested object. Filenames can include a `${feature}` tag that will be replaced with the feature name provided when running the application. Here is an example of a template:
+The JSON template should be structured as a nested object where each key represents a directory and each value can either be an array of filenames or another nested object. Filenames and directories can include a `${feature}` tag that will be replaced with the feature name provided when running the application. Here is an example of a template:
 ```json
 {
     "directory_name": [
