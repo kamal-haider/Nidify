@@ -1,5 +1,5 @@
 name: nidify
-description: A sample command-line application used to build scaffolding.
+description: A command-line application used to build scaffolding.
 version: 1.0.0
 repository: https://github.com/kamal-haider/nidify
 
