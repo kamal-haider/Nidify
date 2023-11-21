@@ -11,10 +11,11 @@ void main(List<String> arguments) {
 
   var featureName = arguments[0];
   var templateFilePath = arguments[1];
+  var rootDirectory = arguments.length > 2 ? arguments[2] : null;
 
   try {
     var jsonBlob = File(templateFilePath).readAsStringSync();
-    nidify.createStructureFromJsonAndName(featureName, jsonBlob);
+    nidify.createStructureFromJsonAndName(featureName, jsonBlob, rootDirectory);
   } catch (e) {
     print("Error reading file: $e");
   }

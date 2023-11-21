@@ -19,34 +19,42 @@ void createFile(String filePath) {
   }
 }
 
-void processEntry(
-    String currentPath, Map<String, dynamic> entry, String featureName) {
-  entry.forEach((key, value) {
-    var targetPath = '$currentPath/$key'.replaceAll("\${feature}", featureName);
-    createDirectory(targetPath);
-
-    if (value is List) {
-      value.forEach((element) {
-        if (element is String) {
-          var filePath =
-              '$targetPath/${element.replaceAll("\${feature}", featureName)}';
-          createFile(filePath);
-        } else if (element is Map<String, dynamic>) {
-          createDirectory(targetPath);
-          processEntry(targetPath, element, featureName);
-        }
-      });
-    } else if (value is Map<String, dynamic>) {
-      processEntry(targetPath, value, featureName);
-    }
-  });
+void processEntry(String currentPath, dynamic entry, String featureName) {
+  if (entry is Map<String, dynamic>) {
+    entry.forEach((key, value) {
+      var targetPath =
+          '$currentPath/$key'.replaceAll("\${feature}", featureName);
+      createDirectory(targetPath);
+      processNestedEntry(targetPath, value, featureName);
+    });
+  } else if (entry is List) {
+    processNestedEntry(currentPath, entry, featureName);
+  }
 }
 
-void createStructureFromJsonAndName(String featureName, String jsonBlob) {
+void processNestedEntry(String currentPath, dynamic entry, String featureName) {
+  if (entry is List) {
+    for (var element in entry) {
+      if (element is String) {
+        var filePath =
+            '$currentPath/${element.replaceAll("\${feature}", featureName)}';
+        createFile(filePath);
+      } else if (element is Map<String, dynamic>) {
+        processEntry(currentPath, element, featureName);
+      }
+    }
+  } else if (entry is Map<String, dynamic>) {
+    processEntry(currentPath, entry, featureName);
+  }
+}
+
+void createStructureFromJsonAndName(String featureName, String jsonBlob,
+    [String? rootDirectory]) {
   try {
     var jsonData = json.decode(jsonBlob);
-    createDirectory(featureName);
-    processEntry(featureName, jsonData, featureName);
+    var currentPath = rootDirectory ?? featureName;
+    createDirectory(currentPath);
+    processEntry(currentPath, jsonData, featureName);
     print("Structure in '$featureName' created successfully.");
   } catch (e) {
     print("Error parsing JSON: $e");

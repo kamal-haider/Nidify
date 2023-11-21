@@ -22,7 +22,10 @@ void main() {
       });
 
       tearDown(() {
-        Directory('test_directory').deleteSync(recursive: true);
+        final directory = Directory('test_directory');
+        if (directory.existsSync()) {
+          directory.deleteSync(recursive: true);
+        }
       });
     });
 
@@ -43,7 +46,10 @@ void main() {
       });
 
       tearDown(() {
-        Directory('test_directory').deleteSync(recursive: true);
+        final directory = Directory('test_directory');
+        if (directory.existsSync()) {
+          directory.deleteSync(recursive: true);
+        }
       });
     });
 
@@ -78,7 +84,10 @@ void main() {
       });
 
       tearDown(() {
-        Directory('test_feature').deleteSync(recursive: true);
+        final directory = Directory('test_feature');
+        if (directory.existsSync()) {
+          directory.deleteSync(recursive: true);
+        }
       });
     });
 
@@ -167,7 +176,10 @@ void main() {
       });
 
       tearDown(() {
-        Directory('test_feature_directory_name').deleteSync(recursive: true);
+        final directory = Directory('test_feature_directory_name');
+        if (directory.existsSync()) {
+          directory.deleteSync(recursive: true);
+        }
       });
     });
   });

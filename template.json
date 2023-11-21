@@ -1,6 +1,15 @@
-{
-    "${feature}_sub_directory": [
-        "file_name.dart",
-        "${feature}_feature_name.dart"
-    ]
-}
+[
+    {
+        "${feature}_sub_directory": [
+            "file_name.dart",
+            "${feature}_feature_name.dart",
+            {
+                "test_sub_directory": [
+                    "test_file_name.dart",
+                    "${feature}_feature_name_test.dart"
+                ]
+            }
+        ]
+    },
+    "filename2.dart"
+]
